@@ -57,12 +57,6 @@ async def purge(ctx, number: int):
 
 @bot.command()
 async def clap(ctx):
-  showDio = random.randint(1, 10)
-  if showDio == 1:
-    await ctx.send('You expected Doug Walker,')
-    await ctx.send(file=discord.File('It_Was_Me__Dio!.jpg'))
-    await ctx.send('But it was me, Dio!')
-  else:
-    await ctx.send(file=discord.File('doug walker fast clap.gif'))
+  await ctx.send(file=discord.File('doug walker fast clap.gif'))
   
 bot.run(token)
