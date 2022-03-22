@@ -1,11 +1,9 @@
 import discord
 import os
 import random
-from keep_alive import keep_alive
 from discord.ext import commands
 from dotenv import load_dotenv
 
-keep_alive()
 load_dotenv()
 token = os.getenv('DISCORD_TOKEN')
 bot = commands.Bot(command_prefix='$')
