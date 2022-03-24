@@ -1,12 +1,19 @@
 import discord
 import os
 import random
+from keep_alive import keep_alive
 from discord.ext import commands
 from dotenv import load_dotenv
+import music
+cogs = [music]
 
+keep_alive()
 load_dotenv()
 token = os.getenv('DISCORD_TOKEN')
-bot = commands.Bot(command_prefix='$')
+bot = commands.Bot(command_prefix='$', intents = discord.Intents.all())
+
+for i in range(len(cogs)):
+  cogs[i].setup(bot)
 
 @bot.command()
 async def verify(ctx, *args):
@@ -54,7 +61,7 @@ async def purge(ctx, number: int):
   await ctx.channel.purge(limit=number)
 
 @bot.command()
-async def clap(ctx):
-  await ctx.send(file=discord.File('doug walker fast clap.gif'))
-  
+    await ctx.send(file=discord.File('doug walker fast clap.gif'))
+    
 bot.run(token)
+  
