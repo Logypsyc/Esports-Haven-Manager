@@ -1,6 +1,5 @@
 import discord
 import os
-import random
 from keep_alive import keep_alive
 from discord.ext import commands
 from dotenv import load_dotenv
@@ -10,8 +9,10 @@ cogs = [music]
 
 keep_alive()
 load_dotenv()
-token = os.getenv('DISCORD_TOKEN')
-bot = commands.Bot(command_prefix='$')
+token = os.getenv("DISCORD_TOKEN")
+intents = discord.Intents.default()
+intents.message_content = True
+bot = commands.Bot(command_prefix='$', intents=intents)
 
 for i in range(len(cogs)):
 	cogs[i].setup(bot)
@@ -45,7 +46,7 @@ async def verify(ctx, *args):
 		role = ctx.guild.get_role(919286283996647454)
 	await ctx.message.author.add_roles(role)
 	await ctx.message.author.send("Info received. Pending verification.")
-	verificationMessage = "<@&842892441237323827>" + ' ' + firstName + ' ' + lastName + ', ' + grade + ', ' + pl
+	verificationMessage = firstName + ' ' + lastName + ', ' + grade + ', ' + pl
 	await channel.send(verificationMessage)
 
 
@@ -68,25 +69,7 @@ async def confirm(ctx, member: discord.Member, memberStatus):
 async def purge(ctx, number: int):
 	await ctx.channel.purge(limit=number + 1)
 
-
-@bot.command()
-async def clap(ctx):
-	showDio = random.randint(1, 10)
-	if showDio == 1:
-		await ctx.send('You expected Doug Walker,')
-		await ctx.send(file=discord.File('It_Was_Me__Dio!.jpg'))
-		await ctx.send('But it was me, Dio!')
-	else:
-		await ctx.send(file=discord.File('doug walker fast clap.gif'))
-
-
-@bot.event
-async def on_message(message):
-  await bot.process_commands(message)
-  if message.channel.id == 920839608726585374:
-    if message.author.bot:
-      return
-    if message.content.lower() in ["sus"]:
-      await message.channel.send("Did someone say *sus* 😱😱😱 HOLY FUCKING SHIT‼️‼️‼️‼️ IS THAT A MOTHERFUCKING AMONG US REFERENCE??????!!!!!!!!!!11!1!1!1!1!1!1! 😱😱😱😱😱😱😱 AMONG US IS THE BEST FUCKING GAME 🔥🔥🔥🔥💯💯💯💯 RED IS SO SUSSSSS 🕵️🕵️🕵️🕵️🕵️🕵️🕵️🟥🟥🟥🟥🟥 COME TO MEDBAY AND WATCH ME SCAN 🏥🏥🏥🏥🏥🏥🏥🏥 🏥🏥🏥🏥 WHY IS NO ONE FIXING O2 🤬😡🤬😡🤬😡🤬🤬😡🤬🤬😡 OH YOUR CREWMATE? NAME EVERY TASK 🔫😠🔫😠🔫😠🔫😠🔫😠 Where Any sus!❓ ❓ Where!❓ ❓ Where! Any sus!❓ Where! ❓ Any sus!❓ ❓ Any sus! ❓ ❓ ❓ ❓ Where!Where!Where! Any sus!Where!Any sus Where!❓ Where! ❓ Where!Any sus❓ ❓ Any sus! ❓ ❓ ❓ ❓ ❓ ❓ Where! ❓ Where! ❓ Any sus!❓ ❓ ❓ ❓ Any sus! ❓ ❓ Where!❓ Any sus! ❓ ❓ Where!❓ ❓ Where! ❓ Where!Where! ❓ ❓ ❓ ❓ ❓ ❓ ❓ Any sus!❓ ❓ ❓ Any sus!❓ ❓ ❓ ❓ Where! ❓ Where! Where!Any sus!Where! Where! ❓ ❓ ❓ ❓ ❓ ❓ I think it was purple!👀👀👀👀👀👀👀👀👀👀It wasnt me I was in vents!!!!!!!!!!!!!!😂🤣😂🤣😂🤣😂😂😂🤣🤣🤣😂😂😂")
-
-bot.run(token)
+try:
+    bot.run(token)
+except:
+  os.system("kill 1")
