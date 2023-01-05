@@ -3,9 +3,6 @@ import os
 from keep_alive import keep_alive
 from discord.ext import commands
 from dotenv import load_dotenv
-import music
-
-cogs = [music]
 
 keep_alive()
 load_dotenv()
@@ -13,10 +10,6 @@ token = os.getenv("DISCORD_TOKEN")
 intents = discord.Intents.default()
 intents.message_content = True
 bot = commands.Bot(command_prefix='$', intents=intents)
-
-for i in range(len(cogs)):
-	cogs[i].setup(bot)
-
 
 @bot.command()
 async def verify(ctx, *args):
